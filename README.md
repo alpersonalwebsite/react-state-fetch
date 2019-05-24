@@ -1,6 +1,6 @@
 # Fetching and setting state with React...
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/alpersonalwebsite/basic-react-state-fetch-example.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/alpersonalwebsite/react-state-fetch.svg)](https://greenkeeper.io/)
 
 This is an easy, basic and raw (no styles attached) example of **HOW to** `fetch` data from x-endpoint and set it as `local state`.
 
@@ -21,4 +21,3 @@ yarn start
 ### Option 1: `<RegularWay />`
 ### Option 2: `<HooksWay />`
 ### Option 3: `<CustomHookWay />`
-
