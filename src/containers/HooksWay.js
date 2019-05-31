@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { API, limitQuery, limitUserResults } from '../apiConfiguration'
+import { API, limitQuery, limitUserResults, offsetQuery } from '../apiConfiguration'
 import uuid from 'uuid'
 
 const HooksWay = props => {
   const [usersState, setUsersState] = useState([])
 
   useEffect(() => {
-    fetch(API + limitQuery + limitUserResults)
+    fetch(`${API}?${limitQuery}${limitUserResults}&${offsetQuery}10`)
       .then(res => res.json())
       .then(data => setUsersState(data))
       .catch(error => console.log('HooksWay', error))

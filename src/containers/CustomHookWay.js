@@ -1,10 +1,10 @@
 import React from 'react'
-import { API, limitQuery, limitUserResults } from '../apiConfiguration'
+import { API, limitQuery, limitUserResults, offsetQuery } from '../apiConfiguration'
 import useFetch from '../hooks/useFetch'
 import uuid from 'uuid'
 
 const CustomHookWay = props => {
-  const users = useFetch(API + limitQuery + limitUserResults, [])
+  const users = useFetch(`${API}?${limitQuery}${limitUserResults}&${offsetQuery}20`, [])
 
   let renderingUsers = null
   renderingUsers = users.map(user => <div key={uuid.v4()}>{user.name}</div>)
