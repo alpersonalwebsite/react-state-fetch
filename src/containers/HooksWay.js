@@ -10,7 +10,7 @@ const HooksWay = props => {
       .then(res => res.json())
       .then(data => setUsersState(data))
       .catch(error => console.log('HooksWay', error))
-  })
+  }, [])
 
   let renderingUsers = null
   renderingUsers = usersState.map(user => <div key={uuid.v4()}>{user.name}</div>)

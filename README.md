@@ -11,7 +11,7 @@ Feel free to replace the `API` with yours or an external one. In any case (also 
 yarn install
 ```
 
-## Run the dev server
+## Running the dev server
 ```
 yarn start
 ```
@@ -21,3 +21,55 @@ yarn start
 ### Option 1: `<RegularWay />`
 ### Option 2: `<HooksWay />`
 ### Option 3: `<CustomHookWay />`
+
+
+## Using *Async/Await*
+
+Alternatively, you can use *Async/Await*
+
+Snippet for `react-state-fetch/src/containers/RegularWay.js`
+
+```javascript
+  componentDidMount() {
+    this.fetchUsers()
+  }
+
+  /* Or
+  async fetchUsers() {}
+*/
+  fetchUsers = async () => {
+    try {
+      const response = await fetch(API + limitQuery + limitUserResults)
+      const parsedResponse = await response.json()
+      this.setState({ users: parsedResponse })
+    }
+    catch (error) {
+      console.log('RegularWay', error)
+    }
+  }
+```
+
+---
+
+## Avoiding infinite loops
+
+Even when this is *outside* the scope of the project's documentation, remember that you should be particularly careful at the time of using `hooks` like `useEffect()`.
+
+The *difference* between this...
+
+```javascript
+// Runs with every render
+useEffect(() => {
+})
+```
+... and this ...
+
+```javascript
+// Runs once
+useEffect(() => {
+}, [])
+```
+
+... is an **infinite loop**.
+
+![asdksdf](images/infinite-loop.png)

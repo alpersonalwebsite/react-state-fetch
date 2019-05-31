@@ -8,7 +8,7 @@ const useFetch = (URI, defaultStateValue) => {
       .then(res => res.json())
       .then(data => setUsersState(data))
       .catch(error => console.log('useFetch', error))
-  })
+  }, [])
 
   return usersState
 }
