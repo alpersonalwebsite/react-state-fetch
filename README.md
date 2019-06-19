@@ -1,6 +1,7 @@
 # Fetching and setting state with React...
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/alpersonalwebsite/react-state-fetch.svg)](https://greenkeeper.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
 This is an easy, basic and raw (no styles attached) example of **HOW to** `fetch` data from x-endpoint and set it as `local state`.
 
