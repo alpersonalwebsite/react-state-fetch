@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: node:11.10.1
+    environment:
+      CI: false
 
     steps:
       - checkout
