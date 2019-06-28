@@ -74,3 +74,18 @@ useEffect(() => {
 ... is an **infinite loop**.
 
 ![asdksdf](images/infinite-loop.png)
+
+---
+
+## Notes
+
+### CI/CD
+**This is unrelated to the project; however, if you want to utilize a similar CI/CD pipeline, you can follow the instructions beneath**
+
+First, be sure that you connect [circleci](https://circleci.com/) with your `GitHub` account setting the proper permissions. Once this is done, go to `Add Projects` and click on `Set Up Project` next to your repository. Then, follow the instructions.
+
+> **What are orbs?**
+Orbs are packages of CircleCI configuration that can be shared across projects. Orbs allow you to make a single bundle of jobs, commands, and executors that can reference each other and can be imported into a CircleCI build configuration and invoked in their own namespace. Orbs are registered with CircleCI, with revisions expressed using the semver pattern. *circleci.com*
+
+> **What is a workflow?** A workflow is a set of rules for defining a collection of jobs and their run order. *circleci.com*
+
