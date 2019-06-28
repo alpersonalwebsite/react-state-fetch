@@ -89,3 +89,5 @@ Orbs are packages of CircleCI configuration that can be shared across projects. 
 
 > **What is a workflow?** A workflow is a set of rules for defining a collection of jobs and their run order. *circleci.com*
 
+Create the file `.circleci/config.yml` with the provided code. Then, commit and push it to your "repo" and click on `Start Building`.
+
