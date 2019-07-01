@@ -26,13 +26,12 @@
     }
   },
   "scripts": {
-    "dev": "react-scripts start",
+    "start": "react-scripts start",
     "lint": "eslint src/**/*.js --ignore-pattern node_modules/",
     "fix": "eslint --fix src/**/*.js --ignore-pattern node_modules/",
     "build": "react-scripts build && cp build/index.html build/200.html",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
