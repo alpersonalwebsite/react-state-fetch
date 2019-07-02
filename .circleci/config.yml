@@ -3,14 +3,16 @@ jobs:
   build:
     docker:
       - image: node:11.10.1
-
     steps:
       - checkout
 
       - run: yarn install
-
       #- run: yarn run test
-      - run: yarn run build
+      - run: 
+          name: Build Project
+          command: yarn run build
+          environment:
+            CI: false
 
   deploy:    
     docker:
