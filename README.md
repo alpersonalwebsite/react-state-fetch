@@ -89,5 +89,57 @@ Orbs are packages of CircleCI configuration that can be shared across projects. 
 
 > **What is a workflow?** A workflow is a set of rules for defining a collection of jobs and their run order. *circleci.com*
 
-Create the file `.circleci/config.yml` with the provided code. Then, commit and push it to your "repo" and click on `Start Building`.
+Create the file `.circleci/config.yml`.
+Example:
 
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:11.10.1
+    environment:
+      CI: false
+
+    steps:
+      - checkout
+
+      - run: yarn install
+      # run: yarn run test
+      - run: yarn run build
+
+  deploy:    
+    docker:
+      - image: buildpack-deps:trusty
+    steps:  
+      - checkout
+      - run: 
+          name: Deploy to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+
+workflows:
+  version: 2
+  build-and-deploy: 
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+```
+
+Go to `travisci`, select your project, click on the `wheel icon` and, under `Build Settings` click on `Environment Variables` and add...
+
+1. **HEROKU_API_KEY**. You can grab its value from [heroku account settings](https://dashboard.heroku.com/account), `reveal API key`.
+2. **HEROKU_APP_NAME**. The value is the name given to your app in `heroku`, in my case `react-state-fetch` (App: https://dashboard.heroku.com/apps/react-state-fetch)
+
+Then, commit and push your local changes to your "external repo" and click on `Start Building`.
+
+Now go to `heroku`, select your app (in this case `react-state-fetch`), click on `Settings`. Under `Buildpacks`...
+1. Remove `heroku/nodejs`
+2. Add `https://github.com/mars/create-react-app-buildpack`
+
+Make a change in one of your files and start the `CI/CD` process. 
