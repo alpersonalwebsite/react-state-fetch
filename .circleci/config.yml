@@ -10,7 +10,7 @@ jobs:
       - checkout
 
       - run: yarn install
-      # For the moment - run: yarn run test
+      # run: yarn run test
       - run: yarn run build
 
   deploy:    
