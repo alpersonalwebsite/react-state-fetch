@@ -1,7 +1,10 @@
 {
-  "name": "basic-react-state-fetch-example",
+  "name": "react-state-fetch",
   "version": "0.1.0",
-  "private": true,
+  "description": "Simple example of fetching data with React and setting local state with setState, useState and useEffect, and, a custom hook",
+  "keywords": ["react state", "react state hook", "useState hook", "useEffect hook", "custom hook fetch", "custom hook state", "fetch and state react"],
+  "author": "Al Diaz",
+  "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
