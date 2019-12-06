@@ -2,7 +2,15 @@
   "name": "react-state-fetch",
   "version": "0.1.0",
   "description": "Simple example of fetching data with React and setting local state with setState, useState and useEffect, and, a custom hook",
-  "keywords": ["react state", "react state hook", "useState hook", "useEffect hook", "custom hook fetch", "custom hook state", "fetch and state react"],
+  "keywords": [
+    "react state",
+    "react state hook",
+    "useState hook",
+    "useEffect hook",
+    "custom hook fetch",
+    "custom hook state",
+    "fetch and state react"
+  ],
   "author": "Al Diaz",
   "license": "MIT",
   "dependencies": {
