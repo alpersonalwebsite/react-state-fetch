@@ -4,7 +4,7 @@ import HooksWay from '../containers/HooksWay'
 import CustomHookWay from '../containers/CustomHookWay'
 import './App.css'
 
-function App () {
+function App() {
   return (
     <React.Fragment>
       <h1>Fetching and setting state with React...</h1>

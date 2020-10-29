@@ -3,25 +3,25 @@ import { API, limitQuery, limitUserResults } from '../apiConfiguration'
 import uuid from 'uuid'
 
 class RegularWay extends Component {
-  constructor (props) {
+  constructor() {
     super()
     this.state = {
       users: []
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     fetch(`${API}?${limitQuery}${limitUserResults}`)
-      .then(res => res.json())
-      .then(data => this.setState({ users: data }))
-      .catch(error => console.log('RegularWay', error))
+      .then((res) => res.json())
+      .then((data) => this.setState({ users: data }))
+      .catch((error) => console.log('RegularWay', error))
   }
 
-  render () {
+  render() {
     const { users } = this.state
 
     let renderingUsers = null
-    renderingUsers = users.map(user => <div key={uuid.v4()}>{user.name}</div>)
+    renderingUsers = users.map((user) => <div key={uuid.v4()}>{user.name}</div>)
 
     return (
       <React.Fragment>

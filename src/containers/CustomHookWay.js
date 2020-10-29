@@ -3,11 +3,11 @@ import { API, limitQuery, limitUserResults, offsetQuery } from '../apiConfigurat
 import useFetch from '../hooks/useFetch'
 import uuid from 'uuid'
 
-const CustomHookWay = props => {
+const CustomHookWay = () => {
   const users = useFetch(`${API}?${limitQuery}${limitUserResults}&${offsetQuery}20`, [])
 
   let renderingUsers = null
-  renderingUsers = users.map(user => <div key={uuid.v4()}>{user.name}</div>)
+  renderingUsers = users.map((user) => <div key={uuid.v4()}>{user.name}</div>)
 
   return (
     <React.Fragment>
