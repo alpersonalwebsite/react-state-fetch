@@ -1,6 +1,6 @@
 # Fetching and setting state with React...
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/alpersonalwebsite/react-state-fetch.svg)](https://greenkeeper.io/)
+<!-- [![Known Vulnerabilities](https://snyk.io/test/github/alpersonalwebsite/react-state-fetch/badge.svg)](https://snyk.io/test/github/alpersonalwebsite/react-state-fetch) -->
 [![CircleCI](https://circleci.com/gh/alpersonalwebsite/react-state-fetch.svg?style=shield)](https://circleci.com/gh/alpersonalwebsite/react-state-fetch)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
