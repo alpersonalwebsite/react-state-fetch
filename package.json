@@ -25,7 +25,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run lint && yarn run format"
+      "pre-commit": "npm run lint && npm run format"
     }
   },
   "scripts": {
@@ -46,8 +46,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.12.1",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.22.1",
