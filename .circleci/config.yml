@@ -2,16 +2,16 @@ version: 2
 jobs:
   build:
     docker:
-      - image: node:11.10.1
+      - image: node:lts
     environment:
       CI: false
 
     steps:
       - checkout
 
-      - run: yarn install
-      # run: yarn run test
-      - run: yarn run build
+      - run: npm install
+      # run: npm run test
+      - run: npm run build
 
   deploy:    
     docker:
