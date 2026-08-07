@@ -1,32 +1,48 @@
 import React, { Component } from 'react'
-import { API, limitQuery, limitUserResults } from '../apiConfiguration'
-import uuid from 'uuid'
+import { buildUsersUrl, jsonOrThrow, readUsers } from '../apiConfiguration'
+import UserList from '../components/UserList'
 
+// Way 1: a class component, fetching in componentDidMount and holding the result in
+// this.state. The pre-hooks way, and still what you get from an older codebase.
 class RegularWay extends Component {
-  constructor() {
-    super()
-    this.state = {
-      users: []
-    }
+  state = {
+    users: [],
+    loading: true,
+    error: null
   }
 
   componentDidMount() {
-    fetch(`${API}?${limitQuery}${limitUserResults}`)
-      .then((res) => res.json())
-      .then((data) => this.setState({ users: data }))
-      .catch((error) => console.log('RegularWay', error))
+    this.fetchUsers()
+  }
+
+  componentWillUnmount() {
+    // Nothing cancels a fetch that is already in flight, so record that we are gone and
+    // let the handlers skip setState. Otherwise React warns about setting state on an
+    // unmounted component, which is the class-component version of the leak the hook
+    // guards against with its `cancelled` flag.
+    this.unmounted = true
+  }
+
+  fetchUsers = () => {
+    this.setState({ loading: true, error: null })
+
+    return fetch(buildUsersUrl())
+      .then(jsonOrThrow)
+      .then(data => {
+        if (!this.unmounted) this.setState({ users: readUsers(data), loading: false })
+      })
+      .catch(error => {
+        if (!this.unmounted) {
+          this.setState({ error: error.message, users: [], loading: false })
+        }
+      })
   }
 
   render() {
-    const { users } = this.state
-
-    let renderingUsers = null
-    renderingUsers = users.map((user) => <div key={uuid.v4()}>{user.name}</div>)
-
     return (
       <React.Fragment>
         <h3>Regular Way</h3>
-        {renderingUsers}
+        <UserList {...this.state} onRetry={this.fetchUsers} />
       </React.Fragment>
     )
   }
