@@ -18,12 +18,16 @@ const useFetch = URI => {
     // and CI=false in the pipeline is what kept anyone from seeing it. The effect
     // never re-ran, so the hook silently ignored a changed URL: a custom fetch hook
     // that cannot refetch.
+    // A flag stops us writing state after the fact; an AbortController stops the request
+    // itself, so a superseded or unmounted fetch is not still occupying a connection and
+    // downloading a body nobody will read.
     let cancelled = false
+    const controller = new AbortController()
 
     setLoading(true)
     setError(null)
 
-    fetch(URI)
+    fetch(URI, { signal: controller.signal })
       .then(jsonOrThrow)
       .then(data => {
         // Guard against setting state after unmount, or after URI changed and an older
@@ -32,7 +36,9 @@ const useFetch = URI => {
         if (!cancelled) setUsers(readUsers(data))
       })
       .catch(err => {
-        if (!cancelled) {
+        // An abort rejects with AbortError. That is us, not a failure, so it must not be
+        // rendered as one.
+        if (!cancelled && err.name !== 'AbortError') {
           setError(err.message)
           setUsers([])
         }
@@ -43,6 +49,7 @@ const useFetch = URI => {
 
     return () => {
       cancelled = true
+      controller.abort()
     }
   }, [URI])
 

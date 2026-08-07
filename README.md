@@ -46,7 +46,7 @@ over `URI`, so the effect ran once and ignored every later URL. A custom fetch h
 that cannot fetch a second URL is most of the hook missing. Create React App had been
 reporting it on every build:
 
-```
+```text
 React Hook useEffect has a missing dependency: 'URI'   react-hooks/exhaustive-deps
 ```
 
@@ -77,9 +77,11 @@ dynos and the host started answering `404 No such app`.
 cp .env.example .env      # then edit it, .env is gitignored
 ```
 
-Only variables prefixed `REACT_APP_` reach the bundle, and Create React App **inlines
-them at build time**, so whatever you put there ends up in `build/static/js/*.js`. An
-endpoint URL is fine. A key or a token is not.
+Create React App exposes `REACT_APP_`-prefixed variables to the bundle, plus the two
+built-ins `NODE_ENV` and `PUBLIC_URL`; nothing else in your environment reaches client
+code. What does reach it is **inlined at build time**, so it ships inside
+`build/static/js/*.js` in plain sight. An endpoint URL is fine there. A key or a token
+is not.
 
 Remember to enable CORS on whatever you point this at, including a `localhost` on a
 different port. The backend above already does.
