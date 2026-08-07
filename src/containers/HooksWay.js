@@ -1,24 +1,38 @@
-import React, { useState, useEffect } from 'react'
-import { API, limitQuery, limitUserResults, offsetQuery } from '../apiConfiguration'
-import uuid from 'uuid'
+import React, { useState, useEffect, useCallback } from 'react'
+import { buildUsersUrl, jsonOrThrow, readUsers } from '../apiConfiguration'
+import UserList from '../components/UserList'
 
+// Way 2: the same fetch with useState and useEffect, written out inline. Compare with
+// CustomHookWay, which is this exact logic lifted into a reusable hook.
 const HooksWay = () => {
-  const [usersState, setUsersState] = useState([])
+  const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
-  useEffect(() => {
-    fetch(`${API}?${limitQuery}${limitUserResults}&${offsetQuery}10`)
-      .then((res) => res.json())
-      .then((data) => setUsersState(data))
-      .catch((error) => console.log('HooksWay', error))
+  // useCallback so the effect below has a stable dependency, and so Retry can call the
+  // same function the effect does.
+  const fetchUsers = useCallback(() => {
+    setLoading(true)
+    setError(null)
+
+    return fetch(buildUsersUrl({ offset: 10 }))
+      .then(jsonOrThrow)
+      .then(data => setUsers(readUsers(data)))
+      .catch(err => {
+        setError(err.message)
+        setUsers([])
+      })
+      .finally(() => setLoading(false))
   }, [])
 
-  let renderingUsers = null
-  renderingUsers = usersState.map((user) => <div key={uuid.v4()}>{user.name}</div>)
+  useEffect(() => {
+    fetchUsers()
+  }, [fetchUsers])
 
   return (
     <React.Fragment>
       <h3>Hooks Way</h3>
-      {renderingUsers}
+      <UserList users={users} loading={loading} error={error} onRetry={fetchUsers} />
     </React.Fragment>
   )
 }
